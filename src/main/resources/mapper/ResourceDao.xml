@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.practice.dao.ResourceDao">
+    <select id="queryResourceByContent" resultType="com.practice.entity.Resource">
+        SELECT res_id, content_id, res_url
+        FROM tb_resource
+        WHERE content_id=#{contentId}
+        ORDER BY res_id
+        DESC
+    </select>
+    <insert id="insertResource" useGeneratedKeys="true" keyProperty="resId"
+            keyColumn="res_id" parameterType="com.practice.entity.Resource">
+        INSERT INTO
+        tb_resource(res_id, content_id, res_url)
+        VALUES
+        (#{resId}, #{contentId}, #{resUrl})
+    </insert>
+    <delete id="deleteResource" parameterType="com.practice.entity.Resource">
+        DELETE FROM
+        tb_resource
+        WHERE
+        res_id=#{resId}
+    </delete>
+    <delete id="deleteResourceByContent" parameterType="com.practice.entity.Resource">
+        DELETE FROM
+        tb_resource
+        WHERE
+        content_id=#{contentId}
+    </delete>
+</mapper>

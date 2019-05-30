@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.practice.dao.FolderDao">
+    <select id="queryFolder" resultType="com.practice.entity.Folder">
+        SELECT folder_id, folder_name, num_items, create_time, modify_time, priority, creator_id
+        FROM tb_folder
+        ORDER BY priority
+        DESC
+    </select>
+    <select id="queryFolderByUser" resultType="com.practice.entity.Folder">
+        SELECT folder_id, folder_name, num_items, create_time, modify_time, priority, creator_id
+        FROM tb_folder
+        WHERE creator_id=#{creatorId}
+        ORDER BY priority
+        DESC
+    </select>
+    <insert id="insertFolder" useGeneratedKeys="true" keyProperty="folderId"
+            keyColumn="folder_id" parameterType="com.practice.entity.Folder">
+        INSERT INTO
+        tb_folder(folder_name, num_items, create_time, modify_time, priority, creator_id)
+        VALUES
+        (#{folderName}, #{numItems}, #{createTime}, #{modifyTime}, #{priority}, #{creatorId})
+    </insert>
+    <update id="updateFolder" parameterType="com.practice.entity.Folder">
+        UPDATE tb_folder
+        <set>
+            <if test="folderName!=null">folder_name=#{folderName},</if>
+            <if test="numItems!=null">num_items=#{numItems},</if>
+            <if test="modifyTime!=null">modify_time=#{modifyTime},</if>
+            <if test="priority!=null">priority=#{priority},</if>
+            <if test="creatorId!=null">creator_id=#{creatorId},</if>
+        </set>
+        WHERE
+        folder_id=#{folderId}
+    </update>
+    <delete id="deleteFolder" parameterType="com.practice.entity.Folder">
+        DELETE FROM
+        tb_folder
+        WHERE
+        folder_id=#{folderId}
+    </delete>
+</mapper>
