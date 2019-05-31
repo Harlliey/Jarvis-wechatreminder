@@ -114,7 +114,7 @@ public class ContentServiceImpl implements ContentService{
             if (cIdList.size() != 0) {
                 for (Integer id : cIdList) {
                     int lines = resourceDao.deleteResourceByContent(id);
-                    if (lines <= 0) throw new RuntimeException("删除备忘时删除资源失败!");
+                    if (lines < 0) throw new RuntimeException("删除备忘时删除资源失败!");
                 }
             }
             try {
