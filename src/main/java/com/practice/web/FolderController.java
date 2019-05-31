@@ -34,6 +34,15 @@ public class FolderController {
         return modelMap;
     }
 
+    @RequestMapping(value = "listfolderbyid", method = RequestMethod.GET)
+    public Map<String, Object> listFolderById(int folderId) {
+        Map<String, Object> modelMap = new HashMap<>();
+        Folder folder = folderService.getFolderById(folderId);
+        modelMap.put("folder", folder);
+        return modelMap;
+    }
+
+
     @RequestMapping(value = "/getfolderbyuser", method = RequestMethod.GET)
     public Map<String, Object> getFolderByUser(String creatorId) {
         Map<String, Object> modelMap = new HashMap<>();

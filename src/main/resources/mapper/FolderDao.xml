@@ -9,6 +9,11 @@
         ORDER BY priority
         DESC
     </select>
+    <select id="queryFolderById" resultType="com.practice.entity.Folder">
+        SELECT folder_id, folder_name, num_items, create_time, modify_time, priority, creator_id
+        FROM tb_folder
+        WHERE folder_id=#{folderId}
+    </select>
     <select id="queryFolderByUser" resultType="com.practice.entity.Folder">
         SELECT folder_id, folder_name, num_items, create_time, modify_time, priority, creator_id
         FROM tb_folder

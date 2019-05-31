@@ -25,6 +25,11 @@ public class FolderServiceImpl implements FolderService{
     }
 
     @Override
+    public Folder getFolderById(int folderId) {
+        return folderDao.queryFolderById(folderId);
+    }
+
+    @Override
     public List<Folder> getFolderByUser(String creatorId) {
         List<Folder> userFolderList = folderDao.queryFolderByUser(creatorId);
         return userFolderList;

@@ -10,6 +10,8 @@ import java.util.List;
 public interface FolderService {
     List<Folder> getFolderList();
 
+    Folder getFolderById(int folderId);
+
     List<Folder> getFolderByUser(String creatorId);
 
     boolean addFolder(Folder folder);

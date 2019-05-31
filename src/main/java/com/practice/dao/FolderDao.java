@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface FolderDao {
     List<Folder> queryFolder();
+    Folder queryFolderById(int folderId);
     List<Folder> queryFolderByUser(String creatorId);
     int insertFolder(Folder folder);
     int updateFolder(Folder folder);
