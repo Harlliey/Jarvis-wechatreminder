@@ -33,7 +33,7 @@ public class UploadImgServiceImpl implements UploadImgService{
         String originalFilename = file.getOriginalFilename();
         String fileName = RandomUtils.createRandomString(10) + originalFilename.substring(0, 8) + ".png";
         File dest = new File(absoluteImgPath + fileName);
-        String imgUrl = "https://cxyxh.top" + sonImgPath + fileName;
+        String imgUrl = "https://cxyxh.top/jarvis" + sonImgPath + fileName;
         System.out.println(imgUrl);
         try{
             file.transferTo(dest);
