@@ -9,4 +9,5 @@ import java.util.Map;
  */
 public interface UploadImgService {
     String uploadImg(MultipartFile file);
+    boolean deleteImg(String imgUrl);
 }

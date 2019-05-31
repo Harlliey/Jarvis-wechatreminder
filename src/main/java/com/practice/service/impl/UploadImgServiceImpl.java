@@ -44,4 +44,25 @@ public class UploadImgServiceImpl implements UploadImgService{
         }
         return imgUrl;
     }
+
+    @Override
+    public boolean deleteImg(String imgUrl) {
+        String localPath = imgUrl.replaceFirst("https://cxyxh.top/jarvis/images/", absoluteImgPath);
+        System.out.println(localPath);
+        File file = new File(localPath);
+        try {
+            if (file.delete()) {
+                System.out.println(file.getName() + "已删除");
+                return true;
+            } else {
+                System.out.println(file.getName() + "删除失败!");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

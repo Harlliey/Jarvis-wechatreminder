@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.practice.dao.ContentDao">
     <select id="queryContentByUser" resultType="com.practice.entity.Content">
-        SELECT content_id, folder_id, create_time, modify_time, creator_id, content_title, content_text
+        SELECT content_id, folder_id, create_time, modify_time, creator_id, cover_pic, content_title, content_text
         FROM tb_content
         WHERE creator_id=#{creatorId}
         ORDER BY content_id
         DESC
     </select>
     <select id="queryContentByFolder" resultType="com.practice.entity.Content">
-        SELECT content_id, folder_id, create_time, modify_time, creator_id, content_title, content_text
+        SELECT content_id, folder_id, create_time, modify_time, creator_id, cover_pic, content_title, content_text
         FROM tb_content
         WHERE folder_id=#{folderId}
         ORDER BY content_id

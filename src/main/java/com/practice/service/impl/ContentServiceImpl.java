@@ -3,6 +3,7 @@ package com.practice.service.impl;
 import com.practice.dao.ContentDao;
 import com.practice.dao.ResourceDao;
 import com.practice.entity.Content;
+import com.practice.entity.Resource;
 import com.practice.service.ContentService;
 import com.practice.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import java.util.List;
 public class ContentServiceImpl implements ContentService{
     @Autowired
     ContentDao contentDao;
+    @Autowired
+    ResourceService resourceService;
     @Autowired
     ResourceDao resourceDao;
 
@@ -87,8 +90,8 @@ public class ContentServiceImpl implements ContentService{
     @Override
     public boolean deleteContent(int contentId) {
         if (contentId > 0) {
-            int lines = resourceDao.deleteResourceByContent(contentId);
-            if (lines <= 0) throw new RuntimeException("删除备忘前删除资源失败了!");
+            boolean flag = resourceService.deleteResourceByContent(contentId);
+            if (!flag) throw new RuntimeException("删除备忘前删除资源失败了!");
             try {
                 int effectedNum = contentDao.deleteContent(contentId);
                 if (effectedNum > 0) {

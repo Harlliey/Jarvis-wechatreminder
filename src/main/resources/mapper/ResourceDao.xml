@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.practice.dao.ResourceDao">
+    <select id="queryResourceById" resultType="com.practice.entity.Resource">
+        SELECT res_id, content_id, res_url
+        FROM tb_resource
+        WHERE res_id=#{resId}
+    </select>
     <select id="queryResourceByContent" resultType="com.practice.entity.Resource">
         SELECT res_id, content_id, res_url
         FROM tb_resource

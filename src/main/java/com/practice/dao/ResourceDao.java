@@ -8,6 +8,7 @@ import java.util.List;
  * Created by administer on 29/5/19.
  */
 public interface ResourceDao {
+    Resource queryResourceById(int resId);
     List<Resource> queryResourceByContent(int contentId);
     int insertResource(Resource resource);
     int deleteResource(int resId);

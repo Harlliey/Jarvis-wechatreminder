@@ -3,6 +3,7 @@ package com.practice.service.impl;
 import com.practice.dao.ResourceDao;
 import com.practice.entity.Resource;
 import com.practice.service.ResourceService;
+import com.practice.service.UploadImgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,8 @@ public class ResourceServiceImpl implements ResourceService{
 
     @Autowired
     ResourceDao resourceDao;
+    @Autowired
+    UploadImgService uploadImgService;
 
     @Override
     public List<Resource> getResourceByContent(int contentId) {
@@ -47,8 +50,11 @@ public class ResourceServiceImpl implements ResourceService{
     public boolean deleteResource(int resId) {
         if (resId > 0) {
             try {
+                Resource resource = resourceDao.queryResourceById(resId);
                 int effectedNum = resourceDao.deleteResource(resId);
                 if (effectedNum > 0) {
+                    String imgUrl = resource.getResUrl();
+                    uploadImgService.deleteImg(imgUrl);
                     return true;
                 } else {
                     throw new RuntimeException("资源删除不成功!");
@@ -66,8 +72,16 @@ public class ResourceServiceImpl implements ResourceService{
     public boolean deleteResourceByContent(int contentId) {
         if (contentId > 0) {
             try {
+                List<Resource> list = resourceDao.queryResourceByContent(contentId);
                 int effectedNum = resourceDao.deleteResourceByContent(contentId);
                 if (effectedNum > 0) {
+                    if (list.size() > 0) {
+                        for (Resource item : list) {
+                            String imgUrl = item.getResUrl();
+                            System.out.println(imgUrl);
+                            uploadImgService.deleteImg(imgUrl);
+                        }
+                    }
                     return true;
                 } else {
                     throw new RuntimeException("资源删除不成功!");
