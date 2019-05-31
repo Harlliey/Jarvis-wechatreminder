@@ -91,7 +91,9 @@ public class ContentServiceImpl implements ContentService{
     public boolean deleteContent(int contentId) {
         if (contentId > 0) {
             boolean flag = resourceService.deleteResourceByContent(contentId);
+            int lines = resourceDao.deleteResourceByContent(contentId);
             if (!flag) throw new RuntimeException("删除备忘前删除资源失败了!");
+            if (lines <= 0) throw new RuntimeException("删除备忘前删除资源失败了!");
             try {
                 int effectedNum = contentDao.deleteContent(contentId);
                 if (effectedNum > 0) {
